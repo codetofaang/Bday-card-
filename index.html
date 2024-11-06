@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting Card for Bestie</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #e0f7fa, #80deea);
+            overflow: hidden;
+        }
+
+        .card {
+            position: relative;
+            width: 350px;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            color: #f06292;
+            margin: 0;
+        }
+
+        .quote {
+            font-size: 1.2em;
+            color: #455a64;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .timer {
+            font-size: 1.2em;
+            color: #1976d2;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: #ff8a65;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .balloon:before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 40px;
+            background-color: #ff8a65;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Balloons positioned in various places */
+        .balloon:nth-child(1) {
+            left: 20%;
+            background-color: #f06292;
+            animation-duration: 4s;
+            animation-delay: 0s;
+        }
+
+        .balloon:nth-child(2) {
+            left: 50%;
+            background-color: #ffb74d;
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+
+        .balloon:nth-child(3) {
+            left: 80%;
+            background-color: #64b5f6;
+            animation-duration: 6s;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>My Bestie Boby!</h1>
+        <p class="quote">"Moments with you, that’s when I wish I couldn’t stop time."</p>
+        <p class="timer" id="countdown"></p>
+    </div>
+
+    <!-- Floating Balloons -->
+    <div class="balloon" style="top: 10%;"></div>
+    <div class="balloon" style="top: 20%;"></div>
+    <div class="balloon" style="top: 30%;"></div>
+
+    <script>
+        // Countdown timer to December 7, 2024
+        const targetDate = new Date("December 7, 2024 00:00:00").getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+            
+            if (difference < 0) {
+                document.getElementById("countdown").innerHTML = "It's time to celebrate!";
+                return;
+            }
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            
+            document.getElementById("countdown").innerHTML = `${days} Days, ${hours} Hours, ${minutes} Minutes, ${seconds} Seconds`;
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
